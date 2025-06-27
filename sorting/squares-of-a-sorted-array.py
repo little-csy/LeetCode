@@ -6,8 +6,8 @@ class Solution:
         k = len(nums) -1
 
         while left <= right:
-            left_sq = nums[left] ** 2
-            right_sq = nums[right] ** 2
+            left_sq = nums[left] * nums[left]
+            right_sq = nums[right] * nums[right]
             if left_sq >= right_sq:
                results[k] = left_sq
                left += 1
@@ -15,5 +15,5 @@ class Solution:
                 results[k] = right_sq
                 right -= 1
             k -= 1
-            
+
         return results
