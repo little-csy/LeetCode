@@ -37,7 +37,7 @@ class MyLinkedList:
     def addAtIndex(self, index: int, val: int) -> None:
         cur = self.dummyHead
         
-        if index<0 or index >= self.size:
+        if index<0 or index > self.size:
             return
         
         while(index):
