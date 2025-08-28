@@ -1,5 +1,13 @@
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        h1 = set(nums1)
-        h2 = set(nums2)
-        return list(h1&h2)
+        result = set()
+        hasharray = [0] * 1001
+
+        for nums in nums1:
+            hasharray[nums] += 1
+        
+        for nums in nums2:
+            if hasharray[nums] != 0:
+                result.add(nums)
+        
+        return list(result)
