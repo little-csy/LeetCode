@@ -4,12 +4,12 @@ class Solution:
         result = []
         for i in range(len(nums)):
             if nums[i]>target and target>=0:
-                return result
+                break
             if i>0 and nums[i]==nums[i-1]:
                 continue
             for j in range(i+1, len(nums)):
                 if nums[i]+nums[j]>target and target>=0:
-                    return result
+                    break
                 if j>i+1 and nums[j]==nums[j-1]:
                     continue
                 left = j+1
