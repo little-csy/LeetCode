@@ -4,7 +4,7 @@ class Solution:
         nums.sort()
         for i in range(len(nums)):
             if nums[i] > 0:
-                return result
+                break
             
             if i>0 and nums[i]==nums[i-1]:
                 continue
