@@ -9,7 +9,7 @@ class MyStack:
         
     def pop(self) -> int:
         for i in range(len(self.queue_in)-1):
-            self.queue_out=self.queue_in.popleft()
+            self.queue_out.append(self.queue_in.popleft())
         
         self.queue_out, self.queue_in = self.queue_in, self.queue_out
         return self.queue_out.popleft()
@@ -18,7 +18,7 @@ class MyStack:
         return self.queue_in[-1]
         
     def empty(self) -> bool:
-        if self.queue_in is None:
+        if len(self.queue_in) == 0:
             return True
         else:
             return False
