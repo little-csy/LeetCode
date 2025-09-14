@@ -7,7 +7,7 @@ class Solution:
                 if tokens[i] == '+':
                     tokens.append(num1 + num2)
                 if tokens[i] == '-':
-                    tokens.append(num1 - num2)
+                    tokens.append(num2 - num1)
                 if tokens[i] == '*':
                     tokens.append(num1 * num2)
                 if tokens[i] == '/':
