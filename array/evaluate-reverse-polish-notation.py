@@ -16,4 +16,4 @@ class Solution:
             else:
                 tokens.append(tokens[i])
         
-        return tokens.pop()
+        return int(tokens.pop())
