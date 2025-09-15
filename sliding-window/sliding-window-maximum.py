@@ -4,8 +4,7 @@ class Solution:
         self.result = []
 
         for i in range(len(nums)):
-            if i>= k:
-                self.winPop(nums[i])
+            self.winPop(nums[i])
             
             self.winPush(nums[i])
 
@@ -15,7 +14,7 @@ class Solution:
         return self.result
     
     def winPop(self, pop:int) -> None:
-        if pop == self.deq[0]:
+        if self.deq and pop == self.deq[0]:
             self.deq.popleft()
 
     def winPush(self, push:int) -> None:
