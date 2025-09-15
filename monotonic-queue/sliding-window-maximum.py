@@ -4,7 +4,7 @@ class Solution:
         if len(nums) == 1:
             return [nums[0]]
         elif len(nums) == 2:
-            return [max(nums[0], nums[1])]
+            return max(nums[0], nums[1])
         else:
             for i in range(len(nums)-2):
                 max = nums[i]
