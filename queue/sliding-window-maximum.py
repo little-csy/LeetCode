@@ -4,11 +4,12 @@ class Solution:
         self.result = []
 
         for i in range(len(nums)):
-            self.winPop(nums[i])
+            if i>=k:
+                self.winPop(nums[i-k])
             
             self.winPush(nums[i])
 
-            if i >= k-1:
+            if i>=k-1:
                 self.winGetmax()
         
         return self.result
