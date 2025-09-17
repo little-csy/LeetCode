@@ -8,19 +8,11 @@ class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return 0
-        que = deque()
-        que.append(root)
-        cnt = 1
-
-        while que:
-            size = len(que)
-            while size:
-                node = que.popleft()
-                if not node.right and not node.left:
-                    return cnt
-                if node.right:
-                    que.append(node.right)
-                if node.left:
-                    que.append(node.left)
-                size -=1
-            cnt += 1
+        left = self.minDepth(root.left)
+        right = self.minDepth(root.right)
+        if root.left is None and root.right:
+            return 1+right
+        elif root.right is None and root.left:
+            return 1+left
+        depth = 1+min(left, right)
+        return depth
