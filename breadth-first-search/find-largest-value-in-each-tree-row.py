@@ -14,7 +14,7 @@ class Solution:
 
         while que:
             size = len(que)
-            max = 1.0/float('inf')
+            max = float('-inf')
             while size:
                 node = que.popleft()
                 if node.right:
