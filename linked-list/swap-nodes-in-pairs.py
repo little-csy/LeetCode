@@ -18,5 +18,3 @@ class Solution:
             cur = temp1
 
         return dummyHead.next
-
-        
