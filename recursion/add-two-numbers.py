@@ -7,60 +7,27 @@ class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         p1 = l1
         p2 = l2
-        head = ListNode()
-        p3 = head
-        flag = 0
-        while p1 or p2:
-            if p1 is None and p2:
-                if flag == 0:
-                    val = p2.val
-                    flag = 0
-                else:
-                    if p2.val+1>=10:
-                        val = p2.val-9
-                        flag = 1
-                    else:
-                        val = p2.val+1
-                        flag = 0
-                p2 = p2.next
-            if p2 is None and p1:
-                if flag == 0:
-                    val = p1.val
-                    flag = 0
-                else:
-                    if p1.val+1>=10:
-                        val = p1.val-9
-                        flag = 1
-                    else:
-                        val = p1.val+1
-                        flag = 0
+        dummy = ListNode()
+        cur = dummy
+        carry = 0
+        while p1 or p2 or carry:
+            if p1:
+                val1 = p1.val
+            else:
+                val1 = 0
+            if p2:
+                val2 = p2.val
+            else:
+                val2 = 0
+            total = val1+val2+carry
+            carry = total//10
+            new = ListNode(total%10)
+            cur.next = new
+            cur = new
+            if p1:
                 p1 = p1.next
-            if p1 and p2:
-                if p1.val+p2.val >= 10:
-                    if flag == 0:
-                        val = p1.val+p2.val-10
-                        flag = 1
-                    else:
-                        val = p1.val+p2.val-9
-                        flag = 1
-                else:
-                    if flag == 0:
-                        val = p1.val+p2.val
-                        flag = 0
-                    else:
-                        val = p1.val+p2.val+1
-                        if val >= 10:
-                            val = val-10
-                            flag = 1
-                        else:
-                            flag = 0
-                p1 = p1.next
+            if p2:
                 p2 = p2.next
-            new = ListNode(val, None)
-            p3.next = new
-            p3 = new
-        if flag == 1:
-            new = ListNode(1, None)
-            p3.next = new
-        return head.next
+        return dummy.next
+        
         
