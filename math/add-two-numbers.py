@@ -49,7 +49,10 @@ class Solution:
                         flag = 0
                     else:
                         val = p1.val+p2.val+1
-                        flag = 0
+                        if val >= 10:
+                            flag = 1
+                        else:
+                            flag = 0
                 p1 = p1.next
                 p2 = p2.next
             new = ListNode(val, None)
