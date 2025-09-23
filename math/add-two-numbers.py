@@ -20,7 +20,7 @@ class Solution:
                         val = p2.val-9
                         flag = 1
                     else:
-                        val = p2.val
+                        val = p2.val+1
                         flag = 0
                 p2 = p2.next
             if p2 is None and p1:
@@ -32,7 +32,7 @@ class Solution:
                         val = p1.val-9
                         flag = 1
                     else:
-                        val = p1.val
+                        val = p1.val+1
                         flag = 0
                 p1 = p1.next
             if p1 and p2:
