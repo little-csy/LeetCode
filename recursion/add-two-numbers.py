@@ -50,6 +50,7 @@ class Solution:
                     else:
                         val = p1.val+p2.val+1
                         if val >= 10:
+                            val = val-10
                             flag = 1
                         else:
                             flag = 0
