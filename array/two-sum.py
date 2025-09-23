@@ -6,4 +6,5 @@ class Solution:
             if need in cnt:
                 return [index, cnt[need]]
             cnt[value] = index
-        return []    
+        
+        return []
