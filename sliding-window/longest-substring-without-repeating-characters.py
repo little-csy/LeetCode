@@ -13,7 +13,6 @@ class Solution:
                     num.add(s[j])
                     maxcnt +=1
                 else:
-                    if maxcnt>maxlen:
-                        maxlen = maxcnt
                     break
+            maxlen = max(maxlen, maxcnt)
         return maxlen      
