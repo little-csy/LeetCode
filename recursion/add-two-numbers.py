@@ -11,7 +11,7 @@ class Solution:
         p3 = head
         flag = 0
         while p1 or p2:
-            if p1 is None:
+            if p1 is None and p2:
                 if flag == 0:
                     val = p2.val
                     flag = 0
@@ -23,7 +23,7 @@ class Solution:
                         val = p2.val
                         flag = 0
                 p2 = p2.next
-            if p2 is None:
+            if p2 is None and p1:
                 if flag == 0:
                     val = p1.val
                     flag = 0
