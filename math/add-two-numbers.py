@@ -11,23 +11,18 @@ class Solution:
         cur = dummy
         carry = 0
         while p1 or p2 or carry:
+            total = carry
             if p1:
-                val1 = p1.val
-            else:
-                val1 = 0
+                total += p1.val
+                p1 = p1.next
+
             if p2:
-                val2 = p2.val
-            else:
-                val2 = 0
-            total = val1+val2+carry
+                total += p2.val
+                p2 = p2.next
+
             carry = total//10
             new = ListNode(total%10)
             cur.next = new
             cur = new
-            if p1:
-                p1 = p1.next
-            if p2:
-                p2 = p2.next
+
         return dummy.next
-        
-        
