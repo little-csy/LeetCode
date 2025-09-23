@@ -4,6 +4,6 @@ class Solution:
         for index, value in enumerate(nums):
             need = target - value
             if need in cnt:
-                return [cnt[need], index]
+                return [index, cnt[need]]
             cnt[value] = index
-        return []
+        return []    
