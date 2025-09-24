@@ -11,14 +11,12 @@ class Solution:
         p2 = list2
         while p1 and p2:
             if p1.val<=p2.val:
-                new = ListNode(p1.val)
-                cur.next = new
-                cur = new
+                cur.next = p1
+                cur = p1
                 p1 = p1.next
             else:
-                new = ListNode(p2.val)
-                cur.next = new
-                cur = new
+                cur.next = p2
+                cur = p2
                 p2 = p2.next
         if p1:
             cur.next = p1
