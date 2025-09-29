@@ -10,7 +10,7 @@ class Solution:
         p2 = head
         if head is None or head.next is None:
             return False
-        while p1 or p2:
+        while p2:
             p1 = p1.next
             p2 = p2.next.next
             if p1 == p2:
