@@ -8,7 +8,7 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         p1 = head
         p2 = head
-        if head.next is None:
+        if head is None or head.next is None:
             return False
         while p1 or p2:
             p1 = p1.next
