@@ -33,7 +33,7 @@ class Solution:
                 p2 = p2.next
             return None
         
-        if c2 > c1:
+        else:
             d = c2 - c1
             p1 = headA
             p2 = headB
