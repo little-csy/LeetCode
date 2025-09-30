@@ -31,8 +31,6 @@ class Solution:
             else:
                 return False
         
-        if p1 or p2:
-            return False
         return True
 
         
