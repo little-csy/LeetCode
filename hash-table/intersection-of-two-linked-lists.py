@@ -9,9 +9,9 @@ class Solution:
         if headA is None or headB is None:
             return None
         p1 = headA
-        c1 = 1
+        c1 = 0
         p2 = headB
-        c2 = 1
+        c2 = 0
         while p1:
             p1 = p1.next
             c1 += 1
