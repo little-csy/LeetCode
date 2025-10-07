@@ -6,6 +6,6 @@ class Solution:
         for nums in nums:
             presum += nums
             if presum-k in hashmap:
-                cnt += 1
+                cnt += hashmap[presum-k]
             hashmap[presum] = hashmap.get(presum, 0) + 1
         return cnt
