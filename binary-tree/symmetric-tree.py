@@ -9,18 +9,12 @@ class Solution:
         return self.isSametree(root.left, root.right)
     
     def isSametree(self, left:Optional[TreeNode], right:Optional[TreeNode]) -> bool:
-        if left is None and right:
-            return False
-        elif right is None and left:
-            return False
-        elif right is None and left is None:
+        if left is None and right is None:
             return True
-        elif right.val != left.val:
+        elif left is None or right is None:
             return False
-        else:
-            outside = self.isSametree(left.left, right.right)
-            inside = self.isSametree(left.right, right.left)
-            if inside and outside:
-                return True
-            else:
-                return False
+        elif left.val != right.val:
+            return False
+        outside = self.isSametree(left.left, right.right)
+        inside = self.isSametree(left.right, right.left)
+        return outside and inside
