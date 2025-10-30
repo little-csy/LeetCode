@@ -14,9 +14,8 @@ class Solution:
             while size:
                 node = que.popleft()
                 res += self.dfs(node, 0, targetSum)
-                if node.left:
+                if node:
                     que.append(node.left)
-                if node.right:
                     que.append(node.right)
                 size -=1
         return res
