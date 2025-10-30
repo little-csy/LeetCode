@@ -17,6 +17,4 @@ class Solution:
             self.dfs(root.left)
         self.res.append(root.val)
         if root.right:
-            self.dfs(root.right)
-
-        
+            self.dfs(root.right) 
