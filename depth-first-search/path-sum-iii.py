@@ -6,6 +6,8 @@
 #         self.right = right
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        if root is None:
+            return 0
         que = deque()
         que.append(root)
         res = 0
@@ -14,8 +16,9 @@ class Solution:
             while size:
                 node = que.popleft()
                 res += self.dfs(node, 0, targetSum)
-                if node:
+                if node.left:
                     que.append(node.left)
+                if node.right:
                     que.append(node.right)
                 size -=1
         return res
