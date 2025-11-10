@@ -17,10 +17,8 @@ class Solution:
             if right-left+1 == len(p):
                 if have == need:
                     res.append(left)
-                
-                if s[left] in pmap and smap[s[left]] == pmap[s[left]]:
-                    have -= 1
-                    
                 smap[s[left]] -= 1
+                if s[left] in pmap and smap[s[left]] != pmap[s[left]]:
+                    have -= 1
                 left += 1
         return res
