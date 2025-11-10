@@ -1,27 +1,19 @@
 from collections import Counter
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        pmap = Counter(p)
-        smap = {}
-        need = len(pmap)
-        have = 0
-        left = 0
         res = []
+        pmap = Counter(p)
+        smap = Counter()
+        k = len(p)
 
-        for right, val in enumerate(s):
-            smap[val] = smap.get(val, 0) + 1
+        for i, val in enumerate(s):
+            smap[val]+=1
 
-            if val in pmap and smap[val] == pmap[val]:
-                have += 1
+            if i>=k:
+                smap[s[i-k]]-=1
+                if smap[s[i-k]] == 0:
+                    del smap[s[i-k]]
             
-            if right-left+1 == len(p):
-                if have == need:
-                    res.append(left)
-                
-                if s[left] in pmap and smap[s[left]] == pmap[s[left]]:
-                    have -= 1
-                
-                smap[s[left]] -= 1
-
-                left += 1
+            if pmap == smap:
+                res.append(i-k+1)
         return res
