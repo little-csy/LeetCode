@@ -18,7 +18,7 @@ class Solution:
                 if have == need:
                     res.append(left)
                 smap[s[left]] -= 1
-                if smap[s[left]] != pmap[s[left]]:
+                if s[left] in pmap and smap[s[left]] != pmap[s[left]]:
                     have -= 1
                 left += 1
         return res
