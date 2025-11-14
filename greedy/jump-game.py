@@ -6,7 +6,7 @@ class Solution:
             return True
         while i <= cover:
             cover = max(cover, i+nums[i])
-            if cover == len(nums)-1:
+            if cover >= len(nums)-1:
                 return True
             i+=1
         return False
