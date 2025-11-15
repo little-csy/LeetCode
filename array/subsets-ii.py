@@ -17,5 +17,6 @@ class Solution:
                 used[i] = 0
         
         used = [0]*len(nums)
+        nums.sort()
         backtracking(nums, 0, used)
         return res
