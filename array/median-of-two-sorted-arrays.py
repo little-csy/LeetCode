@@ -8,4 +8,3 @@ class Solution:
             return nums1[mid]
         if len1 % 2 == 0:
             return (nums1[mid]+nums1[mid-1])/2
-        
