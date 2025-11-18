@@ -5,26 +5,25 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        if len(lists)==0 or lists is None:
-            return 
-        
+        n = len(lists)
+        if n == 0:
+            return None
         while len(lists)>1:
             tmp = []
-            for i in range(0, len(lists),2):
+            for i in range(0,len(lists),2):
                 if i+1<len(lists):
-                    tmp.append(self.merge2lists(lists[i], lists[i+1]))
+                    tmp.append(self.mergelist(lists[i],lists[i+1]))
                 else:
                     tmp.append(lists[i])
             lists = tmp
-        return lists[0]
-                
+        return lists[0]               
+
         
-    
-    def merge2lists(self, list1:Optional[ListNode], list2:Optional[ListNode]) -> Optional[ListNode]:
+    def mergelist(self, l1: List[Optional[ListNode]], l2: List[Optional[ListNode]]) -> Optional[ListNode]:
         dummy = ListNode()
         cur = dummy
-        p1 = list1
-        p2 = list2
+        p1 = l1
+        p2 = l2
         while p1 and p2:
             if p1.val<=p2.val:
                 cur.next = p1
