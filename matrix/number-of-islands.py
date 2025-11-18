@@ -1,18 +1,21 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        cnt = 0
+        dx = [-1,0,1,0]
+        dy = [0,1,0,-1]
+
+        def dfs(grid, i, j):
+            grid[i][j] = '0'
+            for k in range(4):
+                nx = i+dx[k]
+                ny = j+dy[k]
+                if nx<0 or nx>=len(grid) or ny<0 or ny>=len(grid[0]) or grid[nx][ny] == '0':
+                    continue
+                dfs(grid,nx,ny)
+
+        res = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == '1':
-                    cnt+=1
-                    self.dfs(grid,i,j)
-        return cnt
-    
-    def dfs(self, grid: List[List[str]], i: int, j: int):
-        if i<0 or i>=len(grid) or j<0 or j>=len(grid[0]) or grid[i][j] == '0':
-            return
-        grid[i][j] = '0'
-        self.dfs(grid, i+1,j)
-        self.dfs(grid, i-1,j)
-        self.dfs(grid, i,j-1)
-        self.dfs(grid, i,j+1)
+                    dfs(grid, i, j)
+                    res +=1
+        return res
