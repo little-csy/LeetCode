@@ -19,6 +19,7 @@ class Solution:
                 if (dfs(board,word,index+1,nx,ny)):
                     return True
             board[x][y] = temp
+            return False
 
         for i in range(len(board)):
             for j in range(len(board[0])):
