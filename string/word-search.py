@@ -4,10 +4,10 @@ class Solution:
         dy = [0,1,0,-1]
 
         def dfs(board, word, index, x, y):
-            if board[x][y] != word[index]:
-                return False
             if len(word) == index:
                 return True
+            if board[x][y] != word[index]:
+                return False
             
             temp = board[x][y]
             board[x][y] = '#'
