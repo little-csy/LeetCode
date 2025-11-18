@@ -14,12 +14,12 @@ class Solution:
                 res.append(matrix[j][right])
             right -= 1
 
-            if left<=right:
+            if top<=bottom:
                 for k in range(right, left-1, -1):
                     res.append(matrix[bottom][k])
                 bottom -= 1
             
-            if top<=bottom:
+            if left<=right:
                 for m in range(bottom, top-1, -1):
                     res.append(matrix[m][left])
                 left +=1
