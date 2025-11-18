@@ -1,52 +1,54 @@
 class Node:
-    def __init__(self, key:int, val:int):
+    def __init__(self, key: int, val: int):
         self.key = key
         self.val = val
-        self.prev = None
         self.next = None
+        self.pre = None
 
 class LRUCache:
 
     def __init__(self, capacity: int):
-        self.head = Node(0, 0)
-        self.tail = Node(0, 0)
+        self.head = Node(0,0)
+        self.tail = Node(0,0)
         self.head.next = self.tail
-        self.tail.prev = self.head
-        self.mp = {}
+        self.tail.pre = self.head
+        self.hash_map = {}
         self.capacity = capacity
 
-    def addn(self, node:Node):
-        node.next = self.head.next
-        node.prev = self.head
-        self.head.next.prev = node
+    def addn(self, node: Node):
+        p = self.head.next
+        node.next = p
+        p.pre = node
         self.head.next = node
+        node.pre = self.head
     
-    def removen(self, node:Node):
-        p = node
-        q = node.next
-        q.prev = p.prev
-        p.prev.next = q
+    def removen(self, node: Node):
+        nxt = node.next
+        prv = node.pre
+        prv.next = nxt
+        nxt.pre = prv
 
     def get(self, key: int) -> int:
-        if key in self.mp:
-            p = self.mp[key]
+        if key in self.hash_map:
+            p = self.hash_map[key]
             self.removen(p)
             self.addn(p)
             return p.val
         else:
             return -1
         
+
     def put(self, key: int, value: int) -> None:
-        if key in self.mp:
-            p = self.mp[key]
+        if key in self.hash_map:
+            p = self.hash_map[key]
             self.removen(p)
-        node = Node(key, value)
-        self.addn(node)
-        self.mp[key] = node
-        if len(self.mp) > self.capacity:
-            n = self.tail.prev
-            self.removen(n)
-            del self.mp[n.key]
+        n = Node(key,value)
+        self.addn(n)
+        self.hash_map[key] = n
+        if len(self.hash_map)>self.capacity:
+            t = self.tail.pre
+            self.removen(t)
+            del self.hash_map[t.key]
         
 
 
