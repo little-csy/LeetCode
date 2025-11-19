@@ -25,6 +25,9 @@ class Solution:
                     i+=1
                 nums.append(num)
             elif c=='+' or c=='-':
+                if c=='-':
+                    if i == 0 or s[i-1] in ' (':
+                        nums.append(0)
                 while ops and ops[-1] in '+-':
                     apply()
                 ops.append(c)
