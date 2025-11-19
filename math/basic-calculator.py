@@ -3,13 +3,13 @@ class Solution:
         nums = []
         ops = []
         def apply():
+            b = nums.pop()
             a = nums.pop()
-            b= nums.pop()
             o = ops.pop()
             if o =='+':
                 nums.append(a+b)
             else:
-                nums.append(b-a)
+                nums.append(a-b)
         
         i = 0
         n = len(s)
