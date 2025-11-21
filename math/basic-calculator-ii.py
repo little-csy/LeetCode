@@ -1,0 +1,24 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        s = s.replace(" ","")
+        sign = '+'
+        num = 0
+        stack = []
+
+        for i, c in enumerate(s):
+            if c.isdigit():
+                num = num*10 + int(c)
+            
+            if not c.isdigit() or i==len(s)-1:
+                if sign=='+':
+                    stack.append(num)
+                elif sign=='-':
+                    stack.append(-num)
+                elif sign=='*':
+                    stack[-1] = stack[-1]*num
+                elif sign=='/':
+                    stack[-1] = int(stack[-1]/num)
+            
+                sign = c
+                num = 0
+        return sum(stack)
