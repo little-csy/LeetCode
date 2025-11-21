@@ -14,6 +14,7 @@ class Solution:
         maxarea = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                maxarea = max(dfs(grid, i, j),maxarea)
+                if grid[i][j] == 1:
+                    maxarea = max(dfs(grid, i, j),maxarea)
         
         return maxarea
