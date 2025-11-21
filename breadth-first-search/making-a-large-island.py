@@ -20,10 +20,11 @@ class Solution:
                     hashmap[id] = dfs(grid, i, j, id)
                     id += 1
         maxarea = max(hashmap.values())
-        seen = set()
+        
         for i in range(n):
             for j in range(n):
                 if grid[i][j] == 0:
+                    seen = set()
                     cur = 1
                     area = 0
                     for x,y in [(-1,0),(1,0),(0,1),(0,-1)]:
