@@ -27,11 +27,10 @@ class Solution:
             found_word = False
             for i in range(m):
                 for j in range(n):
-                    if board[i][j] == word[0]:
-                        if dfs(i, j, 0, word):
-                            res.append(word)
-                            found_word = True
-                            break
+                    if dfs(i, j, 0, word):
+                        res.append(word)
+                        found_word = True
+                        break
                 if found_word:
                     break
         return res
