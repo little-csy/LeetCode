@@ -10,7 +10,7 @@ class Solution:
                 stack.append(']')
             elif s[i] == '{':
                 stack.append('}')
-            elif len(stack) == 0 or s[i] != stack[len(stack)-1]:
+            elif len(stack) == 0 or s[i] != stack[-1]:
                 return False
             else:
                 stack.pop()
