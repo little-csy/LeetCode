@@ -1,33 +1,31 @@
 from collections import defaultdict, deque
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        noden = defaultdict(list)
-        nodein = [0] * numCourses
-        ancest = [set() for _ in range(numCourses)]
+        graph = defaultdict(list)
+        indegree = [0] * numCourses
+        ancestor = [set() for _ in range(numCourses)]
         q = deque()
-
-        for s, e in prerequisites:
-            noden[s].append(e)
-            nodein[e] +=1
+        for s,e in prerequisites:
+            graph[s].append(e)
+            indegree[e]+=1
         
-        for i in range(len(nodein)):
-            if nodein[i] == 0:
+        for i in range(numCourses):
+            if indegree[i] == 0:
                 q.append(i)
         
         while q:
-            n = q.popleft()
-            for nxt in noden[n]:
-                ancest[nxt]|= ancest[n]
-                ancest[nxt].add(n)
+            node = q.popleft()
+            for nxt in graph[node]:
+                ancestor[nxt].add(node)
+                ancestor[nxt] |= ancestor[node]
 
-                nodein[nxt] -= 1
-                if nodein[nxt] == 0:
+                indegree[nxt] -= 1
+                if indegree[nxt] == 0:
                     q.append(nxt)
-
         res = []
         for s,e in queries:
-            res.append(s in ancest[e])
-
+            if s in ancestor[e]:
+                res.append(True)
+            else:
+                res.append(False)
         return res
-
-        
