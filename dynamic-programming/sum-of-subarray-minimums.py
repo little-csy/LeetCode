@@ -4,8 +4,9 @@ class Solution:
         ans = 0
 
         for i in range(n):
+            curr_min = arr[i]
             for j in range(i,n):
-                submin = min(arr[i:j+1])
-                ans += submin
+                curr_min = min(curr_min, arr[j])
+                ans += curr_min
         
         return ans
