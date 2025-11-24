@@ -10,5 +10,3 @@ class Solution:
                     break
             res.append(found)
         return res
-
-        
