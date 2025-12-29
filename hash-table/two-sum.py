@@ -5,6 +5,7 @@ class Solution:
             need = target - value
             if need in cnt:
                 return [index, cnt[need]]
-            cnt[value] = index
+            else:
+                cnt[value] = index
         
         return []
