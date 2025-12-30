@@ -1,13 +1,9 @@
 class Solution:
     def longestCommonPrefix(self, strs):
-        if not strs:
-            return ""
-
-        strs.sort()
-        first, last = strs[0], strs[-1]
-
-        i = 0
-        while i < len(first) and i < len(last) and first[i] == last[i]:
-            i += 1
-
-        return first[:i]
+        res = []
+        for char in zip(*strs):
+            if len(set(char)) == 1:
+                res.append(char[0])
+            else:
+                break
+        return ''.join(res)
