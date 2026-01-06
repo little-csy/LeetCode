@@ -4,7 +4,7 @@ class Solution:
         left = 0
         res = 0
         for right in range(len(s)):
-            if s[right] in last:
+            if s[right] in last and right>=last[s[right]]:
                 left = last[s[right]]+1
             last[s[right]] = right
             res = max(res, right-left+1)
