@@ -1,9 +1,9 @@
 class Solution:
     def longestCommonPrefix(self, strs):
-        res = []
-        for char in zip(*strs):
-            if len(set(char)) == 1:
-                res.append(char[0])
-            else:
-                break
-        return ''.join(res)
+        if not strs:
+            return ""
+        for i in range(len(strs[0])):
+            for s in strs[1:]:
+                if strs[0][i] != s[i]:
+                    return strs[0][:i]
+        return 
