@@ -4,6 +4,6 @@ class Solution:
             return ""
         for i in range(len(strs[0])):
             for s in strs[1:]:
-                if strs[0][i] != s[i]:
+                if len(s)==i or strs[0][i] != s[i]:
                     return strs[0][:i]
         return strs[0]
