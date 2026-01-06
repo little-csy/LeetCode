@@ -5,8 +5,8 @@ class Solution:
         res = 0
         for right in range(len(s)):
             if s[right] in last:
-                left = last[s[right]]
+                left = last[s[right]]+1
             last[s[right]] = right
-            res = max(res, right-left)
+            res = max(res, right-left+1)
         return res
             
