@@ -6,4 +6,3 @@ class Solution:
             for s in strs[1:]:
                 if strs[0][i] != s[i]:
                     return strs[0][:i]
-        return 
