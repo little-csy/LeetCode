@@ -4,9 +4,9 @@ class Solution:
         maxlen = 0
         for n in numset:
             if n-1 not in numset:
-                len = 1
+                len=1
                 while n+1 in numset:
                     len+=1
-                    n = n+1
-                maxlen = max(len, maxlen)
+                    n+=1
+                maxlen = max(maxlen,len)
         return maxlen
