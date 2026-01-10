@@ -1,9 +1,9 @@
 class Node:
-    def __init__(self, key: int, val: int):
+    def __init__(self, key:int, value:int):
         self.key = key
-        self.val = val
+        self.value= value
+        self.prev = None
         self.next = None
-        self.pre = None
 
 class LRUCache:
 
@@ -11,44 +11,48 @@ class LRUCache:
         self.head = Node(0,0)
         self.tail = Node(0,0)
         self.head.next = self.tail
-        self.tail.pre = self.head
-        self.hash_map = {}
+        self.tail.prev = self.head
         self.capacity = capacity
-
-    def addn(self, node: Node):
-        p = self.head.next
-        node.next = p
-        p.pre = node
+        self.mp = {}
+        
+    def addn(self, node:Node):
+        nxt = self.head.next
+        nxt.prev = node
         self.head.next = node
-        node.pre = self.head
+        node.prev = self.head
+        node.next = nxt
     
-    def removen(self, node: Node):
+    def removen(self, node:Node):
+        pre = node.prev
         nxt = node.next
-        prv = node.pre
-        prv.next = nxt
-        nxt.pre = prv
+        pre.next = nxt
+        nxt.prev = pre
 
     def get(self, key: int) -> int:
-        if key in self.hash_map:
-            p = self.hash_map[key]
-            self.removen(p)
-            self.addn(p)
-            return p.val
+        if key in self.mp:
+            node = self.mp[key]
+            self.removen(node)
+            self.addn(node)
+            return node.value
         else:
             return -1
         
 
     def put(self, key: int, value: int) -> None:
-        if key in self.hash_map:
-            p = self.hash_map[key]
-            self.removen(p)
-        n = Node(key,value)
-        self.addn(n)
-        self.hash_map[key] = n
-        if len(self.hash_map)>self.capacity:
-            t = self.tail.pre
-            self.removen(t)
-            del self.hash_map[t.key]
+        if key in self.mp:
+            node = self.mp[key]
+            node.value = value
+            self.removen(node)
+            self.addn(node)
+        else:
+            if len(self.mp) >= self.capacity:
+                last = self.tail.prev
+                self.removen(last)
+                del self.mp[last.key]
+            node = Node(key, value)
+            self.addn(node)
+            self.mp[key] = node
+
         
 
 
