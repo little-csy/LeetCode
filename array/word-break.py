@@ -5,6 +5,6 @@ class Solution:
         dp[0] = True
         for i in range(1, len(s)+1):
             for j in range(i):
-                if dp[j] == True and s[j:i] in wordDict:
+                if dp[j] == True and s[j:i] in wordSet:
                     dp[i] = True
         return dp[len(s)]
