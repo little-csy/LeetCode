@@ -6,7 +6,7 @@ class Solution:
         for num in nums:
             sum += num
             if sum not in sums:
-                sums[sum] = 1
+                sums[sum] = sums.get(sum,0)+1
             if sum - k in sums: 
                 ans += sums[sum - k]
                 sums[sum - k] += 1
