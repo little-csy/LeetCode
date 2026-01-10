@@ -11,5 +11,4 @@ class Solution:
                 sums[sum] = sums[sum]+1
             if sum - k in sums: 
                 ans += sums[sum - k]
-                sums[sum - k] += 1
         return ans
