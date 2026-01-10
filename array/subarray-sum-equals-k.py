@@ -5,10 +5,10 @@ class Solution:
         ans = 0
         for num in nums:
             sum += num
+            if sum - k in sums: 
+                ans += sums[sum - k]
             if sum not in sums:
                 sums[sum] = 1
             else:
                 sums[sum] = sums[sum]+1
-            if sum - k in sums: 
-                ans += sums[sum - k]
         return ans
