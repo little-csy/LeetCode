@@ -1,11 +1,11 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        hashmap = {0:1}
-        cnt = 0
-        presum = 0
-        for nums in nums:
-            presum += nums
-            if presum-k in hashmap:
-                cnt += hashmap[presum-k]
-            hashmap[presum] = hashmap.get(presum, 0) + 1
-        return cnt
+        n = len(nums)
+        ans = 0
+        for i in range(n):
+            res = 0
+            for j in range(i, n):
+                res += nums[j]
+                if res == k:
+                    ans+=1
+        return ans
