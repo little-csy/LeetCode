@@ -3,18 +3,18 @@ class Solution:
         res = []
         path = []
 
-        def backtracking(l, r, n):
-            if l==n and r == n:
-                res.append("".join(path))
-                return
+        def backtracking(l, r):
+            if len(path) == 2*n:
+                res.append(''.join(path))
+            
             if l<n:
-                path.append("(")
-                backtracking(l+1, r, n)
+                path.append('(')
+                backtracking(l+1,r)
                 path.pop()
-            if r<n and r<l:
-                path.append(")")
-                backtracking(l,r+1,n)
+            if r<l:
+                path.append(')')
+                backtracking(l, r+1)
                 path.pop()
         
-        backtracking(0,0,n)
+        backtracking(0,0)
         return res
