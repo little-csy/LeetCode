@@ -9,5 +9,4 @@ class Solution:
                 sums[sum] = sums.get(sum,0)+1
             if sum - k in sums: 
                 ans += sums[sum - k]
-                sums[sum - k] += 1
         return ans
