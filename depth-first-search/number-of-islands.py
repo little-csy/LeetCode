@@ -15,6 +15,7 @@ class Solution:
         
         for i in range(row):
             for j in range(col):
-                if dfs(grid, i, j):
+                if grid[i][j] == "1":
+                    dfs(grid, i, j)
                     res+=1
         return res
