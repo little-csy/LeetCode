@@ -7,6 +7,8 @@ class Solution:
         if (sumn-target) %2 == 1:
             return []
         sumneg = (sumn-target)//2
+        if sumneg <0 or sumneg > sumn:
+            return []
         while sumneg:
             for j in range(n, 0, -1):
                 if j<= sumneg:
