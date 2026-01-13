@@ -8,14 +8,16 @@ class Solution:
         sumneg = (sumn-target)//2
         if sumneg <0 or sumneg > sumn:
             return []
+        neg = [False]*(n+1)
         while sumneg:
             for j in range(n, 0, -1):
                 if j<= sumneg:
                     res.append(-j)
+                    neg[j] = True
                     sumneg -= j
         
         for k in range(1,n+1):
-            if -k not in res:
+            if not neg[k]:
                 res.append(k)
         
         return res
