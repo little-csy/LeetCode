@@ -29,5 +29,4 @@ class Solution:
                             return step+1
             front = nxt
             step += 1
-        return step
-                        
+        return 0
