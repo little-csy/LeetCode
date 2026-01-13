@@ -11,7 +11,7 @@ class Solution:
         q.append(root)
         maxsum = root.val
         level = 0
-        maxlevel = 0
+        maxlevel = 1
         while q:
             suml = 0
             size = len(q)
