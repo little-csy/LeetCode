@@ -3,15 +3,15 @@ class Solution:
         res = []
         path = []
 
-        def backtracking(n, k, start):
+        def dfs(n, start):
             if len(path) == k:
                 res.append(path[:])
                 return
-            for i in range(start, n-(k-len(path))+2):
+            
+            for i in range(start, n+1):
                 path.append(i)
-                backtracking(n, k, i+1)
+                dfs(n, i+1)
                 path.pop()
         
-        backtracking(n, k, 1)
+        dfs(n, 1)
         return res
-
