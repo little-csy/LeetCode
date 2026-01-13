@@ -25,6 +25,6 @@ class Solution:
                     break
             
             if len(res)<r-l-1:
-                 res = s[l+1:r]
+                res = s[l+1:r]
         
         return res
