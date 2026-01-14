@@ -6,34 +6,31 @@
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         n = len(lists)
-        if n == 0:
-            return None
-        while len(lists)>1:
-            tmp = []
-            for i in range(0,len(lists),2):
-                if i+1<len(lists):
-                    tmp.append(self.mergelist(lists[i],lists[i+1]))
-                else:
-                    tmp.append(lists[i])
-            lists = tmp
-        return lists[0]               
 
+        if not lists:
+            return None
+
+        def merge2list(l1, l2):
+            dummy = ListNode()
+            p = dummy
+            while l1 and l2:
+                if l1.val < l2.val:
+                    p.next = l1
+                    l1 = l1.next
+                else:
+                    p.next = l2
+                    l2 = l2.next
+                p = p.next
+            
+            if l1:
+                p.next = l1
+            if l2:
+                p.next = l2
+            return dummy.next
         
-    def mergelist(self, l1: List[Optional[ListNode]], l2: List[Optional[ListNode]]) -> Optional[ListNode]:
-        dummy = ListNode()
-        cur = dummy
-        p1 = l1
-        p2 = l2
-        while p1 and p2:
-            if p1.val<=p2.val:
-                cur.next = p1
-                p1 = p1.next
-            else:
-                cur.next = p2
-                p2 = p2.next
-            cur = cur.next
-        if p1:
-            cur.next = p1
-        if p2:
-            cur.next = p2
-        return dummy.next
+        interval = 1
+        while interval < n:
+            for i in range(0, n-interval, 2*interval):
+                lists[i] = merge2list(lists[i], lists[i+interval])
+            interval *= 2
+        return lists[0]
