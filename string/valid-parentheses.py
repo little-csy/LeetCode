@@ -12,8 +12,10 @@ class Solution:
                 stack.append('}')
             elif s[i] == stack[-1]:
                 stack.pop()
-            else:
+            elif len(stack) == 0 or s[i] != stack[-1]:
                 return False
+            else:
+                stack.pop()
         
         if len(stack) == 0:
             return True
