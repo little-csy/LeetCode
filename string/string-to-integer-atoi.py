@@ -10,7 +10,7 @@ class Solution:
         if s[i]=='+':
             sig = 1
             i+=1
-        if s[i]=='-':
+        elif s[i]=='-':
             sig = -1
             i+=1
         
