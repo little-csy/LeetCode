@@ -3,5 +3,8 @@ class Solution:
         seen  = set()
         for val in nums:
             if val in seen:
-                return [val, val+1]
+                if val == 2 and 1 not in seen:
+                    return [val, val+1]
+                else:
+                    return [val, val+1]
             seen.add(val)
