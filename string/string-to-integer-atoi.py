@@ -7,10 +7,10 @@ class Solution:
             i+=1
         
         sig = 1
-        if s[i]=='+':
+        if i<n and s[i]=='+':
             sig = 1
             i+=1
-        elif s[i]=='-':
+        elif i<n and s[i]=='-':
             sig = -1
             i+=1
         
