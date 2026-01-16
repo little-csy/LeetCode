@@ -3,19 +3,33 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        seenr = set()
-        seenc = set()
+        m = len(matrix)
+        n = len(matrix[0])
+        row = False
+        col = False
 
-        for i in range(len(matrix)):
-            for j in range(len(matrix[0])):
+        for j in range(n):
+            if matrix[0][j] == 0:
+                row = True
+        
+        for i in range(m):
+            if matrix[i][0] == 0:
+                col = True
+        
+        for i in range(1, m):
+            for j in range(1, n):
                 if matrix[i][j] == 0:
-                    seenr.add(i)
-                    seenc.add(j)
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
         
-        for val in seenr:
-            for j in range(len(matrix[0])):
-                matrix[val][j] = 0
+        for i in range(1, m):
+            for j in range(1, n):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
         
-        for val in seenc:
-            for i in range(len(matrix)):
-                matrix[i][val] = 0
+        if row:
+            for j in range(n):
+                matrix[0][j] = 0
+        if col:
+            for i in range(m):
+                matrix[i][0] = 0
