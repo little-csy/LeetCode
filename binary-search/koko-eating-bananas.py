@@ -3,10 +3,9 @@ class Solution:
         l = 1
         r = max(piles)
 
-        while l<r:
+        while l<=r:
             hour = 0
             k = (l+r)//2
-            ans = 0
 
             for p in piles:
                 if p%k == 0:
@@ -15,7 +14,7 @@ class Solution:
                     hour+=p//k+1
             
             if hour<=h:
-                r = k
+                r = k-1
             else:
                 l = k+1
         
