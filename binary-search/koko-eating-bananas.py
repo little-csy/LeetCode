@@ -6,6 +6,7 @@ class Solution:
         while l<r:
             hour = 0
             k = (l+r)//2
+            ans = 0
 
             for p in piles:
                 if p%k == 0:
