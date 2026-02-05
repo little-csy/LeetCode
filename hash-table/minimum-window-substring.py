@@ -29,4 +29,4 @@ class Solution:
         if slen == float('inf'):
             return ""
         else:
-            return s[start:start+slen+1]
+            return s[start:start+slen]
