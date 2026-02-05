@@ -1,31 +1,32 @@
 from collections import Counter
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        tmap = Counter(t)
-        smap = {}
-        left = 0
-        need = len(tmap)
-        have = 0
-        res = [-1, -1]
-        reslen = float('inf')
-        for right, val in enumerate(s):
-            smap[val] = smap.get(val, 0) + 1
+        tmp = Counter(t)
+        smp = Counter()
+        require = len(tmp)
+        vaild = 0
+        l = 0
+        start = 0
+        slen = float('inf')
 
-            if val in tmap and smap[val] == tmap[val]:
-                have += 1
+        for r, ch in enumerate(s):
+            if ch in tmp:
+                smp[ch] += 1
+                if smp[ch] == tmp[ch]:
+                    vaild +=1
             
-            while have == need:
-                if right - left + 1 < reslen:
-                    res = [left, right]
-                    reslen = right -left + 1
+            while vaild == require:
+                if r-l+1<slen:
+                    slen = r-l+1
+                    start = l
                 
-                smap[s[left]] -= 1
-                if s[left] in tmap and smap[s[left]] < tmap[s[left]]:
-                    have -= 1
-                left += 1
-            
-        l , r = res
-        if reslen == float('inf'):
+                if s[l] in tmp:
+                    if smp[s[l]] == tmp[s[l]]:
+                        vaild -= 1
+                    smp[s[l]] -= 1
+                l+=1
+        
+        if slen == float('inf'):
             return ""
         else:
-            return s[l:r+1]
+            return s[start:start+slen+1]
