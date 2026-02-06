@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, key:int, value:int):
+    def __init__(self, key:int, value:int)->None:
         self.key = key
-        self.value= value
+        self.value = value
         self.prev = None
         self.next = None
 
@@ -14,17 +14,17 @@ class LRUCache:
         self.tail.prev = self.head
         self.capacity = capacity
         self.mp = {}
-        
+    
     def addn(self, node:Node):
         nxt = self.head.next
+        node.next = nxt
         nxt.prev = node
         self.head.next = node
         node.prev = self.head
-        node.next = nxt
     
     def removen(self, node:Node):
-        pre = node.prev
         nxt = node.next
+        pre = node.prev
         pre.next = nxt
         nxt.prev = pre
 
@@ -36,23 +36,21 @@ class LRUCache:
             return node.value
         else:
             return -1
-        
 
     def put(self, key: int, value: int) -> None:
         if key in self.mp:
             node = self.mp[key]
-            node.value = value
             self.removen(node)
-            self.addn(node)
-        else:
-            if len(self.mp) >= self.capacity:
-                last = self.tail.prev
-                self.removen(last)
-                del self.mp[last.key]
-            node = Node(key, value)
-            self.addn(node)
-            self.mp[key] = node
+            del self.mp[key]
 
+        node = Node(key, value)
+        self.addn(node)
+        self.mp[key] = node
+
+        if self.capacity <len(self.mp):
+            last = self.tail.prev
+            self.removen(last)
+            del self.mp[last.key]
         
 
 
