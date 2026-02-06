@@ -1,10 +1,11 @@
 import heapq
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        intervals.sort(key=lambda x:x[0])
+        intervals.sort()
         heap = []
+
         for s, e in intervals:
-            if heap and s>=heap[0]:
+            if heap and s>heapq[0]:
                 heapq.heappop(heap)
-            heapq.heappush(heap, e)
-        return len(heap)
+            heapq.heappush(heap,e)
+        return len(heapq)
