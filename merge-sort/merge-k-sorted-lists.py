@@ -7,30 +7,30 @@ class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         n = len(lists)
 
-        if not lists:
-            return None
-
-        def merge2list(l1, l2):
-            dummy = ListNode()
+        def mergeL(self, l1, l2):
+            dummy = ListNode(0)
             p = dummy
-            while l1 and l2:
-                if l1.val < l2.val:
-                    p.next = l1
-                    l1 = l1.next
+            p1 = l1
+            p2 = l2
+
+            while p1 and p2:
+                if p1.val < p2.val:
+                    p.next = p1
+                    p1 = p1.next
                 else:
-                    p.next = l2
-                    l2 = l2.next
+                    p.next = p2
+                    p2 = p2.next
                 p = p.next
             
-            if l1:
-                p.next = l1
-            if l2:
-                p.next = l2
             return dummy.next
-        
+
         interval = 1
-        while interval < n:
+        while interval<n:
             for i in range(0, n-interval, 2*interval):
-                lists[i] = merge2list(lists[i], lists[i+interval])
+                lists[i] = mergeL(lists[i], lists[i+interval])
             interval *= 2
         return lists[0]
+
+        
+    
+    
