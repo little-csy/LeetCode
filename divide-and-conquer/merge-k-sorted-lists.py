@@ -5,9 +5,11 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        if not lists:
+            return None
         n = len(lists)
 
-        def mergeL(self, l1, l2):
+        def mergeL(l1, l2):
             dummy = ListNode(0)
             p = dummy
             p1 = l1
@@ -21,6 +23,11 @@ class Solution:
                     p.next = p2
                     p2 = p2.next
                 p = p.next
+            
+            if p1:
+                p.next = p1
+            if p2:
+                p.next = p2
             
             return dummy.next
 
