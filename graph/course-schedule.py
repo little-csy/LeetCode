@@ -1,27 +1,25 @@
-from collections import defaultdict, deque
+from collections import defaultdict
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        node = defaultdict(list)
-        nodein = [0] * numCourses
-        nums = []
-        for nxt, pre in prerequisites:
-            node[pre].append(nxt)
-            nodein[nxt] += 1
+        mp = defaultdict(list)
+        ind = [0]*numCourses
+        for e,s in prerequisites:
+            mp[s].append(e)
+            ind[e]+=1
         
         q = deque()
+        
         for i in range(numCourses):
-            if nodein[i] == 0:
+            if ind[i] == 0:
                 q.append(i)
-        
+        cnt = 0
         while q:
-            n = q.popleft()
-            nums.append(n)
-            for val in node[n]:
-                nodein[val]  -= 1
-                if nodein[val] == 0:
-                    q.append(val)
+            node = q.popleft()
+            cnt+=1
+            
+            for v in mp[node]:
+                ind[v]-=1
+                if ind[v] == 0:
+                    q.append(v)
         
-        if len(nums) == numCourses:
-            return True
-        else:
-            return False
+        return cnt == numCourses
