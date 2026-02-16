@@ -1,18 +1,23 @@
+from collections import defaultdict
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        tmp = Counter(t)
-        smp = Counter()
-        minlen = float("inf")
-        require = len(tmp)
-        vaild = 0
+        tmp = defaultdict(int)
+        smp = defaultdict(int)
+
+        for ch in t:
+            tmp[ch]+=1
+        
+        minlen = float('inf')
         start = 0
         l = 0
+        require = len(tmp)
+        vaild = 0
 
-        for r, ch in enumerate(s):
-            if ch in tmp:
-                smp[ch]+=1
-                if smp[ch] == tmp[ch]:
-                    vaild +=1
+        for r, c in enumerate(s):
+            if c in tmp:
+                smp[c]+=1
+                if smp[c] == tmp[c]:
+                    vaild+=1
             
             while require == vaild:
                 if r-l+1<minlen:
@@ -22,10 +27,10 @@ class Solution:
                 if s[l] in tmp:
                     if smp[s[l]] == tmp[s[l]]:
                         vaild -= 1
-                    smp[s[l]]-=1
+                    smp[s[l]] -= 1
                 l+=1
         
-        if minlen == float("inf"):
+        if minlen == float('inf'):
             return ""
         else:
             return s[start:start+minlen]
