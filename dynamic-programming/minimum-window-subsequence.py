@@ -4,8 +4,8 @@ class Solution:
         lens2 = len(s2)
         i = 0
         j = 0
-        minlen = float("inf")
         begin = 0
+        minlen = float('inf')
 
         while i<lens1:
             k = i
@@ -19,7 +19,7 @@ class Solution:
                 break
             
             end = k-1
-            k-=1
+            k -= 1
             j = lens2-1
 
             while k>=0 and j>=0:
@@ -28,14 +28,14 @@ class Solution:
                 k-=1
             
             start = k+1
-            
+
             if end-start+1<minlen:
                 minlen = end-start+1
                 begin = start
             
             i = start+1
         
-        if minlen == float("inf"):
+        if minlen == float('inf'):
             return ""
         else:
             return s1[begin:begin+minlen]
