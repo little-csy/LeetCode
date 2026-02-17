@@ -28,6 +28,8 @@ class Solution:
                 k-=1
             
             start = k+1
+            k += 1
+            j = 0
 
             if end-start+1<minlen:
                 minlen = end-start+1
