@@ -2,24 +2,28 @@ from collections import defaultdict
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         mp = defaultdict(list)
-        ind = [0]*numCourses
+        indegree = [0]*numCourses
+        q = deque()
+        num = []
+
         for e,s in prerequisites:
             mp[s].append(e)
-            ind[e]+=1
-        
-        q = deque()
+            indegree[e]+=1
         
         for i in range(numCourses):
-            if ind[i] == 0:
+            if indegree[i] == 0:
                 q.append(i)
-        cnt = 0
+        
         while q:
             node = q.popleft()
-            cnt+=1
-            
-            for v in mp[node]:
-                ind[v]-=1
-                if ind[v] == 0:
-                    q.append(v)
+            num.append(node)
+
+            for val in mp[node]:
+                indegree[val] -= 1
+                if indegree[val] == 0:
+                    q.append(val)
         
-        return cnt == numCourses
+        if len(num) == numCourses:
+            return True
+        else:
+            return False      
