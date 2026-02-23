@@ -1,34 +1,34 @@
 class Solution:
     def minWindow(self, s1: str, s2: str) -> str:
-        lens1 = len(s1)
-        lens2 = len(s2)
         i = 0
         j = 0
-        begin = 0
         minlen = float('inf')
+        begin = 0
+        len1 = len(s1)
+        len2 = len(s2)
 
-        while i<lens1:
+        while i<len1:
             k = i
 
-            while k<lens1 and j<lens2:
+            while k<len1 and j<len2:
                 if s1[k] == s2[j]:
                     j+=1
                 k+=1
             
-            if j<lens2:
+            if j<len2:
                 break
             
-            end = k-1
             k -= 1
-            j = lens2-1
+            end = k
+            j = len2-1
 
             while k>=0 and j>=0:
                 if s1[k] == s2[j]:
                     j-=1
                 k-=1
             
-            start = k+1
-            k += 1
+            k+=1
+            start = k
             j = 0
 
             if end-start+1<minlen:
