@@ -7,28 +7,28 @@ class Solution:
         for ch in t:
             tmp[ch]+=1
         
-        minlen = float('inf')
-        start = 0
-        l = 0
         require = len(tmp)
-        vaild = 0
+        valid = 0
+        start = 0
+        minlen = float('inf')
+        l = 0
 
         for r, c in enumerate(s):
             if c in tmp:
                 smp[c]+=1
                 if smp[c] == tmp[c]:
-                    vaild+=1
+                    valid +=1
             
-            while require == vaild:
+            while require == valid:
                 if r-l+1<minlen:
                     minlen = r-l+1
                     start = l
-                
+
                 if s[l] in tmp:
                     if smp[s[l]] == tmp[s[l]]:
-                        vaild -= 1
+                        valid -= 1
                     smp[s[l]] -= 1
-                l+=1
+                l += 1
         
         if minlen == float('inf'):
             return ""
