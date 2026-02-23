@@ -1,12 +1,13 @@
-from collections import defaultdict, deque
+from collections import defaultdict
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        graph = defaultdict(list)
+        mp = defaultdict(list)
         indegree = [0] * numCourses
-        ancestor = [set() for _ in range(numCourses)]
+        ancest = [set() for _ in range(numCourses)]
         q = deque()
+
         for s,e in prerequisites:
-            graph[s].append(e)
+            mp[s].append(e)
             indegree[e]+=1
         
         for i in range(numCourses):
@@ -15,16 +16,17 @@ class Solution:
         
         while q:
             node = q.popleft()
-            for nxt in graph[node]:
-                ancestor[nxt].add(node)
-                ancestor[nxt] |= ancestor[node]
 
-                indegree[nxt] -= 1
-                if indegree[nxt] == 0:
-                    q.append(nxt)
+            for val in mp[node]:
+                ancest[val].add(node)
+                ancest[val] |= ancest[node]
+                indegree[val] -= 1
+                if indegree[val] == 0:
+                    q.append(val)
+        
         res = []
         for s,e in queries:
-            if s in ancestor[e]:
+            if s in ancest[e]:
                 res.append(True)
             else:
                 res.append(False)
