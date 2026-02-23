@@ -1,30 +1,29 @@
-from collections import deque, defaultdict
+from collections import defaultdict
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        mp = defaultdict(list)
         indegree = [0] * numCourses
-        graph = defaultdict(list)
-
-        for a, b in prerequisites:
-            graph[b].append(a)
-            indegree[a] += 1
-        
+        num = []
         q = deque()
 
-        for i in range(len(indegree)):
+        for e, s in prerequisites:
+            mp[s].append(e)
+            indegree[e]+=1
+        
+        for i in range(numCourses):
             if indegree[i] == 0:
                 q.append(i)
         
-        res = []
         while q:
             node = q.popleft()
-            res.append(node)
+            num.append(node)
 
-            for nxt in graph[node]:
-                indegree[nxt] -= 1
-                if indegree[nxt] == 0:
-                    q.append(nxt)
+            for val in mp[node]:
+                indegree[val] -= 1
+                if indegree[val] == 0:
+                    q.append(val)
         
-        if len(res) == numCourses:
-            return res
+        if len(num) == numCourses:
+            return num
         else:
-            return []
+            return 0
