@@ -4,9 +4,9 @@ class Solution:
         mp = defaultdict(list)
         indegree = [0]*numCourses
         q = deque()
-        num = []
+        res = []
 
-        for e,s in prerequisites:
+        for e, s in prerequisites:
             mp[s].append(e)
             indegree[e]+=1
         
@@ -16,14 +16,14 @@ class Solution:
         
         while q:
             node = q.popleft()
-            num.append(node)
+            res.append(node)
 
-            for val in mp[node]:
-                indegree[val] -= 1
-                if indegree[val] == 0:
-                    q.append(val)
+            for nxt in mp[node]:
+                indegree[nxt] -= 1
+                if indegree[nxt] == 0:
+                    q.append(nxt)
         
-        if len(num) == numCourses:
+        if len(res) == numCourses:
             return True
         else:
-            return False      
+            return False
