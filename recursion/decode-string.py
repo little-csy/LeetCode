@@ -1,14 +1,16 @@
 class Solution:
     def decodeString(self, s: str) -> str:
         stack = []
+
         for i in range(len(s)):
             if s[i] != ']':
                 stack.append(s[i])
             else:
-                temp = []
-                while stack and stack[-1] != '[':
-                    temp.append(stack.pop())
-                temp.reverse()
+                tmp = []
+                while stack and stack[-1]!='[':
+                    tmp.append(stack.pop())
+                tmp.reverse()
+                tmp = ''.join(tmp)
                 stack.pop()
 
                 num = []
@@ -16,11 +18,11 @@ class Solution:
                     num.append(stack.pop())
                 num.reverse()
                 if num:
-                    rep = int(''.join(num))
+                    num = int(''.join(num))
                 else:
-                    rep = 1
+                    num = 1
                 
-                new = rep * (''.join(temp))
+                new = num*(tmp)
                 stack.append(new)
         
         return ''.join(stack)
