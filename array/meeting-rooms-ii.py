@@ -4,8 +4,10 @@ class Solution:
         intervals.sort()
         heap = []
 
-        for s, e in intervals:
-            if heap and s>=heap[0]:
+        for s,e in intervals:
+            if heap and s>heap[0]:
                 heapq.heappop(heap)
-            heapq.heappush(heap,e)
+            heapq.heappush(heap, e)
+        
         return len(heap)
+        
