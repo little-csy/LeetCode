@@ -1,29 +1,31 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        t = '#' + '#'.join(s) + '#'
-        n = len(t)
-        p = [0]*n
-        right = 0
-        center = 0
-        max_len = 0
-        max_center = 0
+        res = []
 
-        for i in range(n):
-            mirror = 2*center - i
-            if i<right:
-                p[i] = min(p[mirror], right-i)
+        for i in range(len(s)):
+            l = i-1
+            r = i+1
+            while l>=0 and r<len(s):
+                if s[l] == s[r]:
+                    l-=1
+                    r+=1
+                else:
+                    break
+            
+            if r-l-1>len(res):
+                res = s[l+1:r]
+            
+            l = i
+            r = i+1
 
-            while i-p[i]-1>=0 and i+p[i]+1<n and t[i-p[i]-1] == t[i+p[i]+1]:
-                p[i] += 1
+            while l>=0 and r<len(s):
+                if s[l] == s[r]:
+                    l-=1
+                    r+=1
+                else:
+                    break
             
-            if i+p[i]>right:
-                right = i+p[i]
-                center = i
-            
-            if p[i]>max_len:
-                max_len = p[i]
-                max_center = i
-            
-        start = (max_center-max_len)//2
+            if r-l-1>len(res):
+                res = s[l+1:r]
 
-        return s[start:start+max_len]
+        return res
