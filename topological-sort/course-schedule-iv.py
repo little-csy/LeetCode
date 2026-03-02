@@ -2,13 +2,14 @@ from collections import defaultdict
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
         mp = defaultdict(list)
-        indegree = [0] * numCourses
+        indegree = [0]*numCourses
         ancest = [set() for _ in range(numCourses)]
         q = deque()
+        res = []
 
-        for s,e in prerequisites:
+        for e, s in prerequisites:
             mp[s].append(e)
-            indegree[e]+=1
+            indegree[e] += 1
         
         for i in range(numCourses):
             if indegree[i] == 0:
@@ -17,17 +18,20 @@ class Solution:
         while q:
             node = q.popleft()
 
-            for val in mp[node]:
-                ancest[val].add(node)
-                ancest[val] |= ancest[node]
-                indegree[val] -= 1
-                if indegree[val] == 0:
-                    q.append(val)
+            for nxt in mp[node]:
+                ancest[nxt].add(node)
+                ancest[nxt] |= ancest[node]
+                indegree[nxt] -= 1
+
+                if indegree[nxt] == 0:
+                    q.append(nxt)
         
-        res = []
-        for s,e in queries:
+        for e, s in queries:
             if s in ancest[e]:
                 res.append(True)
             else:
                 res.append(False)
+        
         return res
+
+        
