@@ -8,10 +8,10 @@ class Solution:
                 l = i-1
                 r = i+1
 
-                while l>=0 and arr[l-1]<arr[l]:
+                while l>0 and arr[l-1]<arr[l]:
                     l-=1
                 
-                while r<n and arr[r+1]<arr[r]:
+                while r<n-1 and arr[r+1]<arr[r]:
                     r+=1
                 
                 if r-l+1>res:
