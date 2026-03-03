@@ -1,15 +1,25 @@
 class Solution:
     def findUnsortedSubarray(self, nums: List[int]) -> int:
-        numsort = sorted(nums)
-        left = len(nums)
-        right = 0
+        n = len(nums)
+        maxseen = float('-inf')
+        right = -1
 
-        for i in range(len(nums)):
-            if nums[i] != numsort[i]:
-                left = min(left,i)
-                right = max(right,i)
+        minseen = float('inf')
+        left = -1
+
+        for i in range(n):
+            if nums[i]<maxseen:
+                right = i
+            else:
+                maxseen = nums[i]
         
-        if right<left:
+        for j in range(n-1,-1,-1):
+            if nums[j]>minseen:
+                left = j
+            else:
+                minseen = nums[j]
+        
+        if right == -1:
             return 0
         else:
             return right-left+1
