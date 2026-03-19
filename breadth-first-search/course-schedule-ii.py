@@ -1,14 +1,13 @@
-from collections import defaultdict
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        mp = defaultdict(list)
-        indegree = [0] * numCourses
-        num = []
+        graph = defaultdict(list)
+        indegree = [0]*numCourses
         q = deque()
+        res = []
 
-        for e, s in prerequisites:
-            mp[s].append(e)
-            indegree[e]+=1
+        for end, start in prerequisites:
+            graph[start].append(end)
+            indegree[end] += 1
         
         for i in range(numCourses):
             if indegree[i] == 0:
@@ -16,14 +15,13 @@ class Solution:
         
         while q:
             node = q.popleft()
-            num.append(node)
-
-            for val in mp[node]:
-                indegree[val] -= 1
-                if indegree[val] == 0:
-                    q.append(val)
+            res.append(node)
+            for nxt in graph[node]:
+                indegree[nxt] -= 1
+                if indegree[nxt] == 0:
+                    q.append(nxt)
         
-        if len(num) == numCourses:
-            return num
+        if len(res) == numCourses:
+            return res
         else:
             return []
