@@ -21,7 +21,7 @@ class Solution:
             url = q.popleft()
 
             for nxt in htmlParser.getUrls(url):
-                if nxt.split('/')[2] == host:
+                if nxt not in visit and nxt.split('/')[2] == host:
                     q.append(nxt)
                     visit.add(nxt)
         
