@@ -36,6 +36,7 @@ class Solution:
             t.daemon = True
             t.start()
         
+        
         q.join()
 
         return list(visit)
