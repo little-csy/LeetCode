@@ -31,7 +31,7 @@ class Solution:
                                 q.put(nxt)
                 q.task_done()
         
-        for _ in range(10):
+        for _ in range(4):
             t = threading.Thread(target=worker)
             t.daemon = True
             t.start()
