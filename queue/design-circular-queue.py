@@ -4,7 +4,7 @@ class MyCircularQueue:
         self.q = [0]*k
         self.capacity = k
         self.front = 0
-        self.rear = -1
+        self.rear = k-1
         self.size = 0
         
     def enQueue(self, value: int) -> bool:
