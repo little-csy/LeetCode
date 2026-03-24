@@ -14,6 +14,7 @@ class TimeMap:
         
         l = 0
         r = len(data)-1
+        res = ""
         while l<=r:
             mid  = (l+r)//2
             if data[mid][0]<=timestamp:
