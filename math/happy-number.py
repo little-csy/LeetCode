@@ -1,22 +1,20 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        
         s = set()
-        total = self.get_total(n)
-
-        while total != 1:
-            s.add(total)
-            total = self.get_total(total)
-            if total in s:
+        
+        def get_total(n):
+            total = 0
+            while n>0:
+                digital = n%10
+                total += digital*digital
+                n = n//10
+            return total
+        
+        while True:
+            n = get_total(n)
+            if n not in s:
+                s.add(n)
+            else:
                 return False
-        
-        return True
-
-    def get_total(self, n: int) -> int:
-        total = 0
-        while n != 0 :
-            num = n % 10
-            total += num * num
-            n //= 10
-        
-        return total
+            if n==1:
+                return True
