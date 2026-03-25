@@ -35,7 +35,8 @@ class Solution:
             dfs(node.left)
             dfs(node.right)
         
-        dfs(root)
+        dfs(root.left)
+        dfs(root.right)
 
         node = root.right
         stack = []
