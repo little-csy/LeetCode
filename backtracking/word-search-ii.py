@@ -1,36 +1,37 @@
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        m, n = len(board), len(board[0])
+        m = len(board)
+        n = len(board[0])
         res = []
-        word_set = set(words)  # 为了避免重复word输入
-
-        def dfs(i, j, k, word):
-            if k == len(word):
-                return True
-            if i < 0 or i >= m or j < 0 or j >= n:
-                return False
-            if board[i][j] != word[k]:
-                return False
+        tire = {}
+        for word in words:
+            node = tire
+            for w in word:
+                node = node.setdefault(w, {})
+            node['#'] = word
+        
+        def dfs(i, j, node):
+            c = board[i][j]
+            if c not in node:
+                return
             
-            temp = board[i][j]
-            board[i][j] = '#'     # 标记访问
+            node = node[c]
 
-            found = (dfs(i+1, j, k+1, word) or
-                     dfs(i-1, j, k+1, word) or
-                     dfs(i, j+1, k+1, word) or
-                     dfs(i, j-1, k+1, word))
+            if '#' in node:
+                res.append(node['#'])
+                node.pop('#')
+            
+            board[i][j] = '#'
 
-            board[i][j] = temp    # 回溯
-            return found
+            for dx, dy in [(1,0),(-1,0),(0,1),(0,-1)]:
+                ni, nj = i+dx, j+dy
+                if 0 <= ni < m and 0 <= nj < n and board[ni][nj] != '#':
+                    dfs(ni, nj, node)
+            
+            board[i][j] = c
+        
+        for i in range(m):
+            for j in range(n):
+                dfs(i,j,tire)
 
-        for word in word_set:
-            found_word = False
-            for i in range(m):
-                for j in range(n):
-                    if dfs(i, j, 0, word):
-                        res.append(word)
-                        found_word = True
-                        break
-                if found_word:
-                    break
         return res
