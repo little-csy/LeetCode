@@ -5,36 +5,32 @@ class Solution:
             return True
         if target>x+y:
             return False
-        
         q = deque()
-        q.append((0,0))
         visit = set()
+        q.append((0,0))
         visit.add((0,0))
-
         while q:
             a, b = q.popleft()
-            if a==target or b==target or a+b==target:
+            if a+b==target:
                 return True
             nextStatus = []
-
-            #fill x
+            #fillx
             nextStatus.append((x,b))
-            #fill y
+            #filly
             nextStatus.append((a,y))
-            #empty x
+            #emptyx
             nextStatus.append((0,b))
-            #empty y
+            #emptyy
             nextStatus.append((a,0))
             #x->y
-            pourx = min(a, y-b)
-            nextStatus.append((a-pourx,b+pourx))
+            pour = min(a,y-b)
+            nextStatus.append((a-pour,b+pour))
             #y->x
-            poury = min(x-a,b)
-            nextStatus.append((a+poury,b-poury))
+            pour = min(x-a,b)
+            nextStatus.append((a+pour,b-pour))
 
             for nxt in nextStatus:
                 if nxt not in visit:
                     q.append(nxt)
                     visit.add(nxt)
-        
         return False
