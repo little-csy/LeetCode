@@ -1,9 +1,9 @@
 class Node:
-    def __init__(self, key:int, value:int):
+    def __init__(self,key,value):
         self.key = key
         self.value = value
         self.next = None
-        self.prev = None
+        self.pre = None
 
 class LRUCache:
 
@@ -11,43 +11,46 @@ class LRUCache:
         self.head = Node(0,0)
         self.tail = Node(0,0)
         self.head.next = self.tail
-        self.tail.prev = self.head
+        self.tail.pre = self.head
+        self.hp = {}
         self.capacity = capacity
-        self.mp = {}
-    
-    def addn(self, node:Node):
-        p = self.head.next
+
+    def addn(self, node):
+        nxt = self.head.next
         self.head.next = node
-        node.prev = self.head
-        node.next = p
-        p.prev = node
+        node.pre = self.head
+        node.next = nxt
+        nxt.pre = node
     
-    def removen(self, node:Node):
-        pre = node.prev
+    def removen(self, node):
         nxt = node.next
-        pre.next = nxt
-        nxt.prev = pre
+        prev = node.pre
+        prev.next = nxt
+        nxt.pre = prev
 
     def get(self, key: int) -> int:
-        if key in self.mp:
-            self.removen(self.mp[key])
-            self.addn(self.mp[key])
-            return self.mp[key].value
+        if key in self.hp:
+            node = self.hp[key]
+            self.removen(node)
+            self.addn(node)
+            return node.value
         else:
             return -1
+        
 
     def put(self, key: int, value: int) -> None:
-        if key in self.mp:
-            node = self.mp[key]
+        if key in self.hp:
+            node = self.hp[key]
             self.removen(node)
-            del self.mp[key]
-        node = Node(key,value)
-        self.mp[key] = node
-        self.addn(node)
-        if len(self.mp)>self.capacity:
-            last = self.tail.prev
+            del self.hp[key]
+        newnode = Node(key, value)
+        self.addn(newnode)
+        self.hp[key] = newnode
+        if len(self.hp)>self.capacity:
+            last = self.tail.pre
             self.removen(last)
-            del self.mp[last.key]
+            del self.hp[last.key]
+        
 
         
 
