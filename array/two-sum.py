@@ -1,11 +1,11 @@
+from collections import defaultdict
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        cnt = dict()
-        for index, value in enumerate(nums):
-            need = target - value
-            if need in cnt:
-                return [index, cnt[need]]
-            else:
-                cnt[value] = index
+        hp = defaultdict(int)
+        for idx, val in enumerate(nums):
+            need = target-val
+            if need in hp:
+                return [hp[need], idx]
+            hp[val] = idx
+            
         
-        return []
