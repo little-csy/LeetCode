@@ -7,6 +7,7 @@ class Solution:
             if len(path) == 4:
                 if start>=len(s):
                     res.append('.'.join(path))
+                    return
             
             for i in range(start,len(s)):
                 seg = s[start:i+1]
