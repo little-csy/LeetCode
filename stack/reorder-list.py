@@ -5,37 +5,33 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        if head is None:
-            return
-        
-        fast = slow = head
+        slow = head
+        fast = head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-        
-        last = slow.next
+        head2 = slow.next
         slow.next = None
-        prev = None
-        
-        while last:
-            nxt = last.next
-            last.next = prev
-            prev = last
-            last = nxt
+
+        pre = None
+        p = head2
+        while p:
+            nxt = p.next
+            p.next = pre
+            pre = p
+            p = nxt
+        newhead = pre
 
         p1 = head
-        p2 = prev
+        p2 = newhead
 
-        while p1 and p2:
-            nx1 = p1.next
-            nx2 = p2.next
+        while p2:
+            p1nxt = p1.next
+            p2nxt = p2.next
             p1.next = p2
-            p2.next = nx1
-
-            p1 = nx1
-            p2 = nx2
+            p1 = p1nxt
+            p2.next = p1
+            p2 = p2nxt
         return head
+
         
