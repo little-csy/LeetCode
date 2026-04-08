@@ -5,7 +5,7 @@ class Solution:
         for x in hp:
             if x-1 not in hp:
                 length = 1
-                while x+1 in nums:
+                while x+1 in hp:
                     length += 1
                     x+=1
                 maxlen = max(maxlen,length)
