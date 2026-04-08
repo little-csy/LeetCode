@@ -4,7 +4,7 @@ class Solution:
         heap = []
         intervals.sort()
         for s,e in intervals:
-            if heap and s>heap[0]:
+            if heap and s>=heap[0]:
                 heapq.heappop(heap)
             heapq.heappush(heap,e)
         return len(heap)
