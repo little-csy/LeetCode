@@ -3,7 +3,7 @@ class Solution:
         stack = []
 
         for i in range(len(s)):
-            if s[i] != ']':
+            if s[i]!=']':
                 stack.append(s[i])
             else:
                 tmp = []
@@ -17,12 +17,11 @@ class Solution:
                 while stack and stack[-1].isdigit():
                     num.append(stack.pop())
                 num.reverse()
-                if num:
-                    num = int(''.join(num))
+                num = ''.join(num)
+                if len(num) == 0:
+                    time = 1
                 else:
-                    num = 1
-                
-                new = num*(tmp)
+                    time = int(num)
+                new = time*tmp
                 stack.append(new)
-        
         return ''.join(stack)
