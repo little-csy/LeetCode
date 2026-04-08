@@ -7,21 +7,17 @@
 class Solution:
     def longestConsecutive(self, root: Optional[TreeNode]) -> int:
         self.res = 0
-
-        def dfs(node, parent, leng):
+        
+        def dfs(node,parent,length):
             if not node:
                 return
-            
             if node.val == parent+1:
-                leng+=1
+                length+=1
             else:
-                leng = 1
-            
-            self.res = max(self.res, leng)
-
-            dfs(node.left, node.val, leng)
-            dfs(node.right, node.val, leng)
+                length = 1
+            self.res = max(self.res, length)
+            dfs(node.left,node.val,length)
+            dfs(node.right,node.val,length)
         
-        dfs(root, root.val-1, 0)
-
+        dfs(root, root.val-1,0)
         return self.res
