@@ -1,6 +1,7 @@
 class Solution:
     def subarraysDivByK(self, nums: List[int], k: int) -> int:
-        cnt = {0:1}
+        cnt = defaultdict(int)
+        cnt[0]=1
         pre = 0
         res = 0
 
@@ -9,5 +10,5 @@ class Solution:
             mod = pre%k
             if mod in cnt:
                 res += cnt[mod]
-            cnt[mod] = cnt.get(mod,0)+1
+            cnt[mod] += 1
         return res
