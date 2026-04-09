@@ -3,12 +3,15 @@ class Solution:
         res = 0
         l = 0
         r = len(height)-1
-        while l<=r:
-            w = r-l
-            h = min(height[l], height[r])
-            res = max(res, w*h)
-            if height[l]<=height[r]:
+        while l<r:
+            if height[l]<height[r]:
+                h = height[l]
+                w = r-l
+                res = max(res, h*w)
                 l+=1
             else:
+                h = height[r]
+                w = r-l
+                res = max(res, h*w)
                 r-=1
         return res
