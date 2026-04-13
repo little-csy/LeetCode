@@ -8,21 +8,18 @@
 #        :type url: str
 #        :rtype List[str]
 #        """
-from collections import deque
+
 class Solution:
     def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
-        host = startUrl.split('/')[2]
+        hostname = startUrl.split('/')[2]
         q = deque()
         visit = set()
         q.append(startUrl)
         visit.add(startUrl)
-
         while q:
-            url = q.popleft()
-
-            for nxt in htmlParser.getUrls(url):
-                if nxt not in visit and nxt.split('/')[2] == host:
+            node = q.popleft()
+            for nxt in htmlParser.getUrls(node):
+                if nxt.split('/')[2] == hostname and nxt not in visit:
                     q.append(nxt)
                     visit.add(nxt)
-        
         return list(visit)
