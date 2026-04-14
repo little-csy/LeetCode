@@ -10,25 +10,23 @@
 #        """
 import threading
 import queue
-from urllib.parse import urlparse
 class Solution:
     def crawl(self, startUrl: str, htmlParser: 'HtmlParser') -> List[str]:
-        host = urlparse(startUrl).hostname
+        hostname = startUrl.split('/')[2]
         q = queue.Queue()
-        q.put(startUrl)
         visit = set()
+        q.put(startUrl)
         visit.add(startUrl)
-        v_lock = threading.Lock()
-
+        lock = threading.Lock()
+        
         def worker():
             while True:
-                url = q.get()
-                for nxt in htmlParser.getUrls(url):
-                    if urlparse(nxt).hostname == host:
-                        with v_lock:
-                            if nxt not in visit:
-                                visit.add(nxt)
-                                q.put(nxt)
+                node = q.get()
+                for nxt in htmlParser.getUrls(node):
+                    with lock:
+                        if nxt not in visit and nxt.split('/')[2] == hostname:
+                            q.put(nxt)
+                            visit.add(nxt)
                 q.task_done()
         
         for _ in range(4):
@@ -36,9 +34,6 @@ class Solution:
             t.daemon = True
             t.start()
         
-        
         q.join()
 
-        return list(visit)
-            
-        
+        return list(visit)       
