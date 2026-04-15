@@ -30,7 +30,7 @@ class Solution:
             nxtg = end.next
             end.next = None
             cur = start.next
-            start.next = reverList(start.next)
+            start.next = reverList(cur)
             cur.next = nxtg
             start = cur
             end = cur
