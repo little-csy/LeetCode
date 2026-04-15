@@ -44,7 +44,7 @@ class LRUCache:
         newnode = Node(key,value)
         self.addn(newnode)
         self.hp[key] = newnode
-        if len(self.hp)>self.capacity:
+        while len(self.hp)>self.capacity:
             last = self.tail.pre
             self.removen(last)
             del self.hp[last.key]
