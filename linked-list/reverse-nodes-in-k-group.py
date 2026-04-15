@@ -14,6 +14,7 @@ class Solution:
                 prev = cur
                 cur = nxt
             return prev
+    
         dummy = ListNode(0)
         dummy.next = head
         start = dummy
@@ -34,5 +35,7 @@ class Solution:
             start = cur
             end = cur
         return dummy.next
+
+        
             
         
