@@ -6,9 +6,9 @@ class Solution:
         for i, x in enumerate(heights):
             while stack and heights[stack[-1]] > x:
                 mid = stack.pop()
-                r = stack[-1]
-                l = i
-                w = l-r-1
+                l = stack[-1]
+                r = i
+                w = r-l-1
                 h = heights[mid]
                 res = max(res, h*w)
             
